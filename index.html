@@ -15,6 +15,108 @@
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/styles.css">
+    <style>
+    /* IMMEDIATE MOBILE MENU FIX - INLINE */
+    .hamburger {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 5px !important;
+        cursor: pointer !important;
+        padding: 12px !important;
+        background: #fcf9f2 !important;
+        border-radius: 8px !important;
+        border: 2px solid #0a3d3a !important;
+        z-index: 9999 !important;
+        position: relative !important;
+        min-width: 48px !important;
+        min-height: 48px !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin-left: auto !important;
+    }
+    .hamburger span {
+        display: block !important;
+        width: 28px !important;
+        height: 4px !important;
+        background: #0a3d3a !important;
+        border-radius: 4px !important;
+        transition: all 0.3s ease !important;
+        margin: 2px 0 !important;
+    }
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(6px, 6px) !important;
+    }
+    .hamburger.active span:nth-child(2) {
+        opacity: 0 !important;
+        transform: scaleX(0) !important;
+    }
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px) !important;
+    }
+    @media (max-width: 768px) {
+        .navbar {
+            padding: 10px 16px !important;
+            background: #fcf9f2 !important;
+            border-bottom: 1px solid rgba(10,61,58,0.1) !important;
+            min-height: 60px !important;
+        }
+        .navbar .container {
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            width: 100% !important;
+            padding: 0 !important;
+            flex-wrap: nowrap !important;
+        }
+        .logo { font-size: 1.1rem !important; flex-shrink: 0 !important; }
+        .nav-links {
+            display: none !important;
+            position: fixed !important;
+            top: 60px !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            background: #fcf9f2 !important;
+            padding: 30px 20px !important;
+            flex-direction: column !important;
+            gap: 10px !important;
+            z-index: 9998 !important;
+            overflow-y: auto !important;
+            border-top: 1px solid rgba(10,61,58,0.1) !important;
+            height: calc(100vh - 60px) !important;
+        }
+        .nav-links.open {
+            display: flex !important;
+            animation: slideDown 0.3s ease !important;
+        }
+        .nav-links a {
+            padding: 14px 20px !important;
+            font-size: 1.1rem !important;
+            border-bottom: 1px solid rgba(10,61,58,0.06) !important;
+            width: 100% !important;
+            display: block !important;
+            text-align: left !important;
+            color: #1e2b2a !important;
+            text-decoration: none !important;
+            font-weight: 500 !important;
+        }
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: #e8d5a3 !important;
+            border-radius: 8px !important;
+        }
+        .nav-actions { display: none !important; }
+    }
+    @media (max-width: 480px) {
+        .hamburger { padding: 8px !important; min-width: 40px !important; min-height: 40px !important; }
+        .hamburger span { width: 22px !important; height: 3px !important; }
+        .nav-links a { padding: 12px 16px !important; font-size: 1rem !important; }
+    }
+    @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
 </head>
 <body>
     <!-- ===== NAVIGATION ===== -->
