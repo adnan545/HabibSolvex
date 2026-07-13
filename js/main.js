@@ -1,16 +1,11 @@
 // ============================================
-// HABIB SOLVEX - COMPLETE JAVASCRIPT
+// HABIB SOLVEX - MAIN JAVASCRIPT
 // ============================================
 
 document.addEventListener('DOMContentLoaded', function() {
     
-    // ===== GET ELEMENTS =====
+    // ===== NAVBAR SCROLL =====
     const navbar = document.getElementById('navbar');
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    const body = document.body;
-    
-    // ===== SCROLL EFFECT =====
     if (navbar) {
         window.addEventListener('scroll', function() {
             if (window.scrollY > 50) {
@@ -20,19 +15,20 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
+
     // ===== MOBILE MENU =====
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    const body = document.body;
+    
     if (hamburger && navLinks) {
-        
-        // Toggle menu on hamburger click
         hamburger.addEventListener('click', function(e) {
             e.stopPropagation();
             this.classList.toggle('active');
             navLinks.classList.toggle('open');
             body.classList.toggle('menu-open');
         });
-        
-        // Close menu when clicking a link
+
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', function() {
                 hamburger.classList.remove('active');
@@ -40,8 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 body.classList.remove('menu-open');
             });
         });
-        
-        // Close menu when clicking outside
+
         document.addEventListener('click', function(e) {
             if (navLinks.classList.contains('open')) {
                 const isClickInside = navbar ? navbar.contains(e.target) : false;
@@ -52,8 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
-        
-        // Close on resize (going from mobile to desktop)
+
         window.addEventListener('resize', function() {
             if (window.innerWidth > 768 && navLinks.classList.contains('open')) {
                 hamburger.classList.remove('active');
@@ -62,8 +56,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
-    // ===== SET ACTIVE NAV LINK =====
+
+    // ===== ACTIVE NAV LINK =====
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     document.querySelectorAll('.nav-links a').forEach(link => {
         const href = link.getAttribute('href');
@@ -71,6 +65,6 @@ document.addEventListener('DOMContentLoaded', function() {
             link.classList.add('active');
         }
     });
-    
+
     console.log('Habib Solvex - Ready!');
 });
