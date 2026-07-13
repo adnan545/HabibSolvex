@@ -1,11 +1,16 @@
 // ============================================
-// HABIB SOLVEX - MOBILE MENU FIX
+// HABIB SOLVEX - COMPLETE JAVASCRIPT
 // ============================================
 
 document.addEventListener('DOMContentLoaded', function() {
     
-    // ===== NAVBAR SCROLL EFFECT =====
+    // ===== GET ELEMENTS =====
     const navbar = document.getElementById('navbar');
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    const body = document.body;
+    
+    // ===== SCROLL EFFECT =====
     if (navbar) {
         window.addEventListener('scroll', function() {
             if (window.scrollY > 50) {
@@ -15,63 +20,49 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-
-    // ===== MOBILE HAMBURGER MENU =====
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    const body = document.body;
     
+    // ===== MOBILE MENU =====
     if (hamburger && navLinks) {
-        // Click handler for hamburger
+        
+        // Toggle menu on hamburger click
         hamburger.addEventListener('click', function(e) {
             e.stopPropagation();
             this.classList.toggle('active');
             navLinks.classList.toggle('open');
-            
-            if (navLinks.classList.contains('open')) {
-                body.classList.add('menu-open');
-                body.style.overflow = 'hidden';
-            } else {
-                body.classList.remove('menu-open');
-                body.style.overflow = '';
-            }
+            body.classList.toggle('menu-open');
         });
-
+        
         // Close menu when clicking a link
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', function() {
                 hamburger.classList.remove('active');
                 navLinks.classList.remove('open');
                 body.classList.remove('menu-open');
-                body.style.overflow = '';
             });
         });
-
+        
         // Close menu when clicking outside
         document.addEventListener('click', function(e) {
             if (navLinks.classList.contains('open')) {
-                const navbarElement = document.querySelector('.navbar');
-                const isClickInside = navbarElement ? navbarElement.contains(e.target) : false;
-                if (!isClickInside) {
+                const isClickInside = navbar ? navbar.contains(e.target) : false;
+                if (!isClickInside && !hamburger.contains(e.target)) {
                     hamburger.classList.remove('active');
                     navLinks.classList.remove('open');
                     body.classList.remove('menu-open');
-                    body.style.overflow = '';
                 }
             }
         });
-
-        // Close menu on window resize
+        
+        // Close on resize (going from mobile to desktop)
         window.addEventListener('resize', function() {
             if (window.innerWidth > 768 && navLinks.classList.contains('open')) {
                 hamburger.classList.remove('active');
                 navLinks.classList.remove('open');
                 body.classList.remove('menu-open');
-                body.style.overflow = '';
             }
         });
     }
-
+    
     // ===== SET ACTIVE NAV LINK =====
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     document.querySelectorAll('.nav-links a').forEach(link => {
@@ -80,6 +71,6 @@ document.addEventListener('DOMContentLoaded', function() {
             link.classList.add('active');
         }
     });
-
-    console.log('Habib Solvex website loaded successfully!');
+    
+    console.log('Habib Solvex - Ready!');
 });
