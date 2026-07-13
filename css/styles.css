@@ -1,5 +1,6 @@
 /* ============================================
-   HABIB SOLVEX - FULLY RESPONSIVE STYLES
+   HABIB SOLVEX - COMPLETE STYLES
+   Fully Responsive with Mobile Menu Fix
    ============================================ */
 
 /* ===== ROOT VARIABLES ===== */
@@ -153,7 +154,10 @@ p {
 }
 .badge-gold { background: var(--golden-light); color: var(--deep-green); }
 
-/* ===== NAVIGATION ===== */
+/* ============================================
+   NAVIGATION - COMPLETE FIX
+   ============================================ */
+
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -193,6 +197,7 @@ p {
     text-decoration: none;
     display: flex;
     align-items: center;
+    flex-shrink: 0;
 }
 .logo span { color: var(--golden); }
 .logo .oil-drop {
@@ -244,6 +249,7 @@ p {
     display: flex;
     align-items: center;
     gap: clamp(8px, 1.2vw, 16px);
+    flex-shrink: 0;
 }
 .nav-actions button {
     background: none;
@@ -256,26 +262,46 @@ p {
 }
 .nav-actions button:hover { color: var(--golden); }
 
+/* ===== HAMBURGER MENU - FIXED ===== */
 .hamburger {
     display: none;
     flex-direction: column;
     gap: 5px;
     cursor: pointer;
-    padding: 5px;
+    padding: 10px;
+    background: rgba(252, 249, 242, 0.95);
+    border-radius: 8px;
+    border: 1px solid rgba(10, 61, 58, 0.1);
     z-index: 1001;
+    position: relative;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
 }
+
+.hamburger:hover {
+    background: var(--golden-light);
+    border-color: var(--golden);
+}
+
 .hamburger span {
-    width: 25px;
+    display: block;
+    width: 24px;
     height: 3px;
     background: var(--charcoal);
     border-radius: 3px;
     transition: all 0.3s ease;
+    margin: 2px 0;
 }
+
 .hamburger.active span:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
 }
 .hamburger.active span:nth-child(2) {
     opacity: 0;
+    transform: scaleX(0);
 }
 .hamburger.active span:nth-child(3) {
     transform: rotate(-45deg) translate(5px, -5px);
@@ -831,37 +857,6 @@ p {
 }
 .alert .close-btn:hover { opacity: 1; }
 
-/* ===== IMAGE GALLERY ===== */
-.image-gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-    gap: clamp(16px, 2vw, 24px);
-}
-.image-gallery-grid img {
-    width: 100%;
-    height: clamp(200px, 25vw, 250px);
-    object-fit: cover;
-    border-radius: 20px;
-    box-shadow: var(--shadow-medium);
-}
-
-/* ===== CTA BANNER ===== */
-.cta-banner {
-    background: var(--gradient-hero);
-    border-radius: clamp(20px, 3vw, 32px);
-    padding: clamp(30px, 5vw, 60px);
-    text-align: left;
-}
-.cta-banner h2 {
-    font-size: clamp(1.5rem, 3vw, 2.2rem);
-    color: var(--deep-green);
-}
-.cta-banner p {
-    max-width: 600px;
-    margin: 16px 0 0;
-    color: var(--charcoal-light);
-}
-
 /* ============================================
    RESPONSIVE BREAKPOINTS
    ============================================ */
@@ -880,9 +875,7 @@ p {
     .hero-visual { flex: 1; width: 100%; }
     
     .contact-grid { grid-template-columns: 1fr; }
-    
     .section-header { text-align: center; }
-    
     .contact-hero { text-align: center; }
     .contact-hero p { margin: 16px auto 0; }
     
@@ -891,52 +884,116 @@ p {
         left: 50%;
         transform: translateX(-50%);
     }
-    
-    .navbar { padding: 15px 24px; }
-    .navbar .container { flex-wrap: wrap; }
 }
 
-/* ===== MOBILE PHONES ===== */
+/* ===== MOBILE PHONES - HAMBURGER VISIBLE ===== */
 @media (max-width: 768px) {
     .container { padding: 0 20px; }
     
-    .navbar { padding: 12px 16px; }
-    .navbar.scrolled { padding: 10px 16px; }
+    /* ===== NAVBAR MOBILE FIX ===== */
+    .navbar {
+        padding: 10px 16px !important;
+        min-height: 60px;
+        background: rgba(252, 249, 242, 0.98) !important;
+        border-bottom: 1px solid rgba(10, 61, 58, 0.06);
+    }
     
+    .navbar.scrolled {
+        padding: 8px 16px !important;
+        background: rgba(252, 249, 242, 0.98) !important;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+    }
+    
+    .navbar .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 0;
+        flex-wrap: nowrap;
+    }
+    
+    .logo {
+        font-size: 1.2rem !important;
+        flex-shrink: 0;
+    }
+    
+    .logo .oil-drop {
+        width: 10px;
+        height: 12px;
+    }
+    
+    /* ===== HAMBURGER - ALWAYS VISIBLE ===== */
+    .hamburger {
+        display: flex !important;
+        position: relative;
+        z-index: 1001;
+    }
+    
+    /* ===== NAV LINKS - HIDDEN BY DEFAULT ===== */
     .nav-links {
-        display: none;
-        flex-direction: column;
-        background: var(--cream);
+        display: none !important;
         position: absolute;
         top: 60px;
         left: 0;
         right: 0;
+        background: var(--cream);
         padding: 20px;
         box-shadow: var(--shadow-medium);
         border-radius: 0 0 20px 20px;
-        gap: 12px;
+        flex-direction: column;
+        gap: 8px;
         width: 100%;
+        z-index: 1000;
+        border-top: 1px solid rgba(10, 61, 58, 0.06);
     }
-    .nav-links.open { 
-        display: flex; 
+    
+    .nav-links.open {
+        display: flex !important;
         animation: slideDown 0.3s ease;
     }
-    .nav-links a { 
-        padding: 10px 0; 
+    
+    .nav-links a {
+        padding: 12px 16px !important;
         font-size: 1rem;
-        width: 100%;
         border-bottom: 1px solid rgba(10, 61, 58, 0.06);
+        width: 100%;
+        display: block;
+        text-align: left;
+        white-space: normal;
     }
-    .nav-links a::after { display: none; }
     
-    .hamburger { display: flex; }
-    
-    .nav-actions button { 
-        font-size: 1rem; 
-        padding: 4px;
+    .nav-links a:last-child {
+        border-bottom: none;
     }
-    .nav-actions .badge { display: none; }
     
+    .nav-links a::after {
+        display: none;
+    }
+    
+    .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+    }
+    
+    .nav-actions button {
+        font-size: 1rem;
+        padding: 6px;
+    }
+    
+    .nav-actions .badge {
+        display: none;
+    }
+    
+    /* ===== BODY LOCK WHEN MENU OPEN ===== */
+    body.menu-open {
+        overflow: hidden;
+    }
+    
+    /* ===== HERO MOBILE ===== */
     .hero { 
         padding: 30px 20px; 
         margin-top: 70px;
@@ -968,6 +1025,7 @@ p {
         padding: 12px 16px;
     }
     
+    /* ===== PRODUCTS MOBILE ===== */
     .product-grid { 
         grid-template-columns: repeat(2, 1fr); 
         gap: 12px;
@@ -987,12 +1045,14 @@ p {
         width: 100%;
     }
     
+    /* ===== FEATURES MOBILE ===== */
     .features-grid { 
         grid-template-columns: 1fr; 
         gap: 16px;
     }
     .feature-card { padding: 20px; }
     
+    /* ===== CERTIFICATIONS MOBILE ===== */
     .cert-grid { 
         justify-content: center; 
         gap: 10px;
@@ -1005,8 +1065,10 @@ p {
         justify-content: center;
     }
     
+    /* ===== TESTIMONIALS MOBILE ===== */
     .testimonial-grid { grid-template-columns: 1fr; }
     
+    /* ===== CONTACT MOBILE ===== */
     .contact-hero { 
         padding: 30px 20px; 
         margin-top: 70px;
@@ -1015,7 +1077,6 @@ p {
     .contact-hero h1 { font-size: 1.8rem; }
     
     .contact-info, .contact-form-wrapper { padding: 20px; }
-    
     .form-row { grid-template-columns: 1fr; gap: 0; }
     
     .quick-contact { 
@@ -1030,6 +1091,7 @@ p {
         justify-content: center;
     }
     
+    /* ===== FOOTER MOBILE ===== */
     .footer-grid { 
         grid-template-columns: 1fr 1fr; 
         gap: 24px;
@@ -1047,34 +1109,46 @@ p {
     
     .section { padding: 30px 0; }
     .section-header { margin-bottom: 30px; }
-    
-    .image-gallery-grid { 
-        grid-template-columns: 1fr 1fr; 
-        gap: 12px;
-    }
-    .image-gallery-grid img { height: 160px; }
-    
-    .cta-banner { 
-        padding: 24px 20px; 
-        text-align: center;
-    }
-    .cta-banner p { margin: 12px auto 0; }
-    
-    .contact-grid { margin: 30px 0; }
-    
-    .btn-lg { 
-        padding: 14px 28px; 
-        font-size: 0.9rem;
-    }
-    .btn { 
-        padding: 12px 24px; 
-        font-size: 0.85rem;
-    }
 }
 
-/* ===== VERY SMALL PHONES (320px - 480px) ===== */
+/* ===== VERY SMALL PHONES ===== */
 @media (max-width: 480px) {
     .container { padding: 0 16px; }
+    
+    .navbar {
+        padding: 8px 12px !important;
+        min-height: 50px;
+    }
+    
+    .logo {
+        font-size: 1rem !important;
+    }
+    
+    .logo .oil-drop {
+        width: 8px;
+        height: 10px;
+    }
+    
+    .nav-links {
+        top: 50px;
+        padding: 16px;
+    }
+    
+    .nav-links a {
+        padding: 10px 14px !important;
+        font-size: 0.9rem;
+    }
+    
+    .hamburger {
+        padding: 6px;
+        min-width: 36px;
+        min-height: 36px;
+    }
+    
+    .hamburger span {
+        width: 20px;
+        height: 2.5px;
+    }
     
     .hero { padding: 24px 16px; }
     .hero-content h1 { font-size: 1.5rem; }
@@ -1112,23 +1186,11 @@ p {
     }
     .footer .social-links { justify-content: center; }
     
-    .image-gallery-grid { 
-        grid-template-columns: 1fr; 
-        gap: 10px;
-    }
-    .image-gallery-grid img { height: 140px; }
-    
     .contact-hero h1 { font-size: 1.5rem; }
     
     .badge { 
         font-size: 0.6rem; 
         padding: 4px 12px;
-    }
-    
-    .logo { font-size: 1.1rem; }
-    .logo .oil-drop { 
-        width: 8px; 
-        height: 12px; 
     }
     
     .info-item { 
@@ -1145,7 +1207,10 @@ p {
     .info-item .icon i { font-size: 0.9rem; }
 }
 
-/* ===== ANIMATIONS ===== */
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
 @keyframes slideDown {
     from {
         opacity: 0;
